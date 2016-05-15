@@ -1,0 +1,214 @@
+
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity\nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime}\nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+\section{Introduction}
+ 
+The incompressible Stokes equations describing creeping or highly viscous flows are derived from the incompressible Navier-Stokes equations. The derivation is done from the viscous flow perspective, since the inertial flow perspective is inappropriate for creeping flows. The physical meaning of the choice of pressure scale based on viscous shear stress is fully explained, which is commonly left unexplained in the literature. The physical meaning of the nondimensional parameters arising from the nondimensionalization is discussed.
+
+\section{Low Reynolds Number Flows}
+
+\subsection{Physical Meaning of Small Reynolds Number}
+
+A very small Reynolds number is indicative of the dominance of viscosity in the flow. Therefore, it is natural to consider the Navier-Stokes equations from the perspective of viscosity:
+
+\begin{equation} \label{NS1-viscNondim}
+Re St~ \partialTimeVel + Re ~\inertTermVel = -\frac{Re}{2Fr} \surfaceNormal - \frac{Re}{2 Eu}\pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-viscNondim}
+\divergence\velocity = 0 
+\end{equation}
+
+What does it mean physically for the Reynolds number to be small? 
+$$ Re = \frac{LV}{\nu}  = \frac{\frac{L^2}{\nu}}{\frac{L}{V}} = \frac{T_{viscosity}}{T_{inertia}} \ll 1 \Longleftrightarrow T_{viscosity} \ll T_{inertia} $$
+
+This means that the inertial flow is much slower than the processes associated with viscosity.
+
+Another way to interpret a small Reynolds number is when viscous shear stress $\tau$ dissipates most of the kinetic energy of the inertial flow:
+
+$$ KE \sim \rho V^2,~ \tau \sim \frac{\rho \nu V}{L},~ \frac{KE}{\tau} = \frac{LV}{\nu} = Re \ll 1 \Longleftrightarrow KE \ll \tau$$
+
+This means that the energy dissipation due to viscous shear stresses dominates the kinetic energy in the energy balance of the flow \cite[p. 484]{sivukhin}.
+
+\subsubsection{Choice of Time Scale}
+
+Small Reynolds number means that the viscous dissipation is a much faster process than the inertial flow of the fluid's particles:
+
+$$ Re = \frac{T_{viscosity}}{T_{inertia}} \ll 1 \implies T_{viscosity} \ll T_{inertia} $$
+
+In the limit $ Re \longrightarrow 0 \implies T_{visc} = 0$, which means that viscous dissipation happens infinitely fast. Naturally, infinitely fast processes cannot serve as a measure of processes that take finite time to evolve. Therefore, the appropriate characteristic time scale of the system is the time scale of the inertial flow:
+
+$$ T = T_{inertia} = \frac{L}{V} $$
+
+\subsubsection{Choice of Pressure Scale}
+
+The choice of the characteristic scale for the pressure is based on the consideration that for low Reynolds number flows the kinetic energy is negligible compared to the viscous shear stress. Therefore, the estimate of a characteristic viscous shear stress is adopted as a characteristic pressure scale.
+
+
+There are at least two ways to arrive at an estimate of the viscous shear stress.
+
+The first is to consider Newton's approximation to the force $F$ due to viscosity\cite{zorich}. The surface force due of viscosity is directly proportional to the surface area (estimated as $L^2$) of contact between two layers of fluid, the speed of their relative motion $V$, and inversely proportional to the distance between the moving layer of the fluid and the layer that is at rest (estimated as $L$). The constant of proportionality is, by definition, the dynamic viscosity $\mu = \rho \nu$:
+
+$$ F = \frac{\mu V L^2}{L} = \frac{\rho \nu V L^2}{L} = \rho \nu VL$$
+
+Hence, the viscous shear stress, which is simply the force due to viscosity per area, is
+
+$$ P = \frac{F}{L^2} = \frac{\rho \nu V L}{L^2} = \frac{\rho \nu V}{L}$$
+
+Also, the viscous stress tensor $\tau_{ij}$ can be estimated based on its dimension: 
+
+$$ \tau_{ij} = \rho \nu (\frac{\partial v_i}{\partial x_j} + \frac{\partial v_j}{\partial x_i}) \sim \frac{\rho \nu V}{L} = P $$
+
+It is interesting to see why the choice of scale based on kinetic energy is inappropriate for low Reynolds number flows.
+
+The equations (\ref{NS1-viscNondim}) and (\ref{NS2-viscNondim}) suggest two characteristic pressure scales:
+
+$$ P_1 = \frac{2EuP}{Re} = \frac{\rho \nu V}{L}$$
+
+and
+
+$$ P_2 = 2EuP  = \rho V^2$$
+
+
+Their ratio is equal to the Reynolds number:
+
+$$ \frac{P_2}{P_1} = \rho V^2 \frac{L}{\rho \nu V} = \frac{LV}{\nu} = Re \Longleftrightarrow P_2 = Re P_1$$
+
+Considering these choices of scale, the coefficient multiplying the gradient of pressure in the equation (\ref{NS1-viscNondim}) becomes either
+
+$$ \frac{Re}{2 Eu} = \frac{P_1L}{\rho \nu V} = 1$$
+
+or 
+
+$$ \frac{Re}{2 Eu} = \frac{P_2L}{\rho \nu V} = Re \frac{P_1L}{\rho \nu V} = Re $$
+
+If the scale $P_2$ is chosen, the pressure gradient term will vanish in the limit $ Re \longrightarrow 0$. This contradicts the physical fact that pressure influences low Reynolds number flows \cite[pp. 433-434]{leal}. 
+
+Thus, the natural choice of characteristic pressure scale for low Reynolds number flows is the characteristic viscous shear stress:
+
+$$ P = P_{viscosity} = \frac{\rho \nu V}{L} $$
+
+\subsection{Estimation of Nondimensional Parameters} \label{stokes_parameters}
+
+Given the choices of time and pressure scales discussed above, we can estimate the nondimensional coefficients in the equations (\ref{NS1-viscNondim}) and (\ref{NS2-viscNondim}).
+
+\subsubsection{Strouhal Number}
+
+Strouhal number 
+
+$$ St = \frac{L}{VT} = 1 $$ 
+
+The physical interpretation of Strouhal number being equal to unity is that the stationary and nonstationary components of the flow are in balance.
+
+\subsubsection{Reynolds Number Over Froude Number}
+
+$$ \frac{Re}{2Fr} = \frac{gL^2}{\nu V} = \frac{\rho gL}{\frac{\rho \nu V}{L}} = \frac{E_{gravity}}{P_{viscosity}} $$
+
+This dimensionless number can be interpreted as a measure of the work done by the gravitational field on the fluid in comparison with the viscous shear stresses.
+
+\subsubsection{Reynolds Number Over Euler Number}
+
+$$ \frac{Re}{2Eu} = \frac{PL}{\rho \nu V} = 1 $$
+
+This ratio can be interpreted as a balance of pressure and viscous shear stresses in the flow.
+
+\subsubsection{Euler Number}
+
+$$ Eu = \frac{\rho V^2}{2P} = \frac{\rho V^2}{2} \frac{L}{\rho\nu V} = \frac{Re}{2}$$
+
+Euler number can be interpreted as a ratio characterizing energy balance between the kinetic energy of the flow and and viscous shear stresses.
+
+\subsubsection{Nondimensional Equations}
+
+Considering the estimations of the nondimensional parameters presented above, the equations (\ref{NS1-viscNondim}) and (\ref{NS2-viscNondim}) become:
+
+
+\begin{equation} \label{NS1-viscNondim_scales}
+Re(\partialTimeVel + \inertTermVel) = -\frac{gL^2}{\nu V} \surfaceNormal - \pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-viscNondim_scales}
+\divergence\velocity = 0 
+\end{equation}
+
+\subsection{Stokes Equations}
+
+Now it is possible to derive the Stokes equations from the equations (\ref{NS1-viscNondim_scales}) and (\ref{NS2-viscNondim_scales}) by taking the limit of $ Re \longrightarrow 0$, which is a common approximation when creeping or very viscous flows are considered:
+
+\begin{equation} \label{NS1-StokesNondim}
+\laplacianVel = \frac{gL^2}{\nu V} \surfaceNormal + \pressGrad 
+\end{equation}
+\begin{equation} \label{NS2-StokesNondim}
+\divergence\velocity = 0 
+\end{equation}
+
+\section{Passage to Dimensional Stokes Equations}
+
+Since Stokes equations are commonly presented in a dimensional form, it is educational to demonstrate the underlying procedure that makes the dimensional form of the equations valid.
+
+Firstly, equation (\ref{NS2-StokesNondim}) is brought back by multiplying it by 
+
+$$ \frac{P}{L^2} = \frac{\rho \nu V}{L^3}$$
+
+and the equation (\ref{NS1-StokesNondim}) becomes dimensional when multiplied by 
+
+$$ \frac{\nu V}{L^2} = \frac{2g Fr}{Re}$$
+
+which is all equivalent to a change of variables 
+
+$$ t^{\prime}  = \frac{t}{T} = \frac{tV}{L},~ \velocityNondim = \frac{\velocity}{V},~ \mathbf{r^{\prime}} = \frac{\mathbf{x}}{L},~ p^{\prime} = \frac{p}{P} = \frac{pL}{\rho \nu V} $$  
+
+By performing either of the above procedures, we obtain Stokes equations in a dimensional form:
+\
+\begin{equation} \label{NS1-Stokes}
+\nu \laplacianVel = g \surfaceNormal + \frac{1}{\rho} \pressGrad 
+\end{equation}
+\begin{equation} \label{NS2-Stokes}
+\divergence\velocity = 0
+\end{equation}
+
+\subsection{Stokes Equations vs. Navier-Stokes}
+
+Thus, the only difference between Stokes and Navier-Stokes equations is the presence of the inertial terms. In addition, the Poisson equation for pressure becomes Laplace's equation [\ref{pressure_laplace}], i.e. a homogenous Poisson equation, which manifests the independence of pressure from velocity in highly viscous flows. Furthermore, Stokes equations are linear, which further simplifies their numerical solution.
+
+These facts could be postulated from purely physical consideration, yet only dimensional analysis presented above truly justifies neglecting the inertial terms under the condition $$Re \ll 1 $$

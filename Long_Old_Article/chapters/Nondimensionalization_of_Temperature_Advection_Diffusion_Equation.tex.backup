@@ -1,0 +1,192 @@
+
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity\nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+
+\providecommand{\partialTimeTemp}{\partial_t\theta}
+\providecommand{\inertTermTemp}{(\velocity\nabla)\theta}
+\providecommand{\tempGrad}{\nabla \theta}
+\providecommand{\laplacianTemp}{\Delta\theta}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime}\nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+
+\section{Introduction}
+
+The derivation of the temperature advection-diffusion based on the principle of conservation of energy is presented. Then, the temperature advection-diffusion is nondimensionalized from both the convection and conduction perspectives, and the physical meaning of the corresponding nondimensional parameters is discussed. 
+
+\section{Derivation of Temperature Advection-Diffusion Equation}
+
+The so-called temperature advection-diffusion, which is mathematically equivalent to the heat equation with the additional terms responsible for convective transport of heat, provides an approximate description of heat transfer processes in a thermally isotropic and uniform medium. \footnote{An alternative name is convection-diffusion equation. In terms of semantics, advection is preferrable to convection in this context. Indeed, \emph{convection} means the flow of the fluid in response to the heat gradients in the fluid. \emph{Advection}, however, is a term used to describe a transport of a quantity (such as temperature, concentration of a chemical, etc.) in response to the fluid motion. That is why, in this case, temperature is \emph{advected}. Of course, advection of temperature (heat) causes convection of a fluid an vice versa, so these proceses are interrelated, However, \emph{convective heat transfer} is often referred to as \emph{convection}, but, in the light of our previous remarks, it would be more appropriate to call it \emph{advection}.} It describes the evolution of the temperature field in time. Remarkably, the same equation is used to describe mass transfer processes, since oftentimes the underlying physical assumptions are mathematically equivalent.
+
+The assumptions underlying our derivation are the following.\cite{shubin}
+
+\subsection{Constant Heat Capacity}
+
+The amount of heat required for a substance of mass $m$ to change its temperature from $\theta_1$ to $\theta_2$ is directly proportional to $m$ and the increment of temperature $\theta_2 - \theta_1$:
+
+$$ Q = cm(\theta_2 - \theta_1), ~[c] = \frac{L^2}{\Theta T^2} $$
+
+The coefficient $c$ is called \emph{specific heat capacity} (i.e. heat capacity per unit mass).
+
+\subsection{Fourier Law of Heat Conduction}
+
+The amount of heat $\Delta Q$ transferred through an infinitesimal plate of area $\Delta S$ in time $\Delta t$ is directly proportional to $\Delta S$, $\Delta t$, and the rate of change of temperature along the unit normal to that plate $\tempGrad \cdot \mathbf{n}$:
+
+$$ \Delta Q = -k\Delta S \Delta t ~ \tempGrad \cdot \mathbf{n}, ~ k > 0, ~[k] = \frac{ML}{T^3\Theta} $$
+
+The coefficient $k$ is called \emph{thermal conductivity}. Note that the heat flows opposite to the increase of temperature, which explain the negative sign in the equation above.
+
+\subsection{Conservation of Energy}
+
+The rate of change of the amount of heat in a volume $\Omega \subset \mathbb{R}^3$ is 
+
+$$ \frac{dQ}{dt} = \frac{d}{dt}\int \limits_\Omega \rho c~\theta dV = \rho c \int \limits_\Omega \frac{d\theta}{dt} dV$$
+
+Note that $c$, $\rho$, and $k$ were assumed constant (uniform and isotropic medium), and the differentiation under the integral is allowed assuming that the temperature field $\theta$ is smooth enough. The last assumption is usually plausible since temperature transfer is a diffusive process which smoothens discontinuities.
+
+Simultaneously, heat is flowing out of the volume $\Omega$ through its boundary $\partial \Omega$:
+
+$$ \frac{dQ_{out}}{dt} = -\int \limits_{\partial \Omega} k (\tempGrad \cdot \mathbf{n}) ~dS$$
+
+In other words, the amount of heat flowing out through the boundary per unit time is directly proportional to the negative flux of the gradient of temperature. 
+
+By divergence theorem
+
+$$ \int \limits_{\partial \Omega} (\tempGrad \cdot \mathbf{n}) ~dS = \int \limits_{\Omega} (\nabla \cdot \tempGrad) dV = \int \limits_{\Omega} \laplacianTemp dV \Longrightarrow  \frac{dQ_{out}}{dt} = - k\int \limits_{\Omega} \laplacianTemp dV $$
+
+Conservation of energy requires that, given there are no sources of heat, the change of the amount of heat in the volume is equal to the amount of heat leaving or entering it through the bounday:
+
+$$ \frac{dQ}{dt}  = -\frac{dQ_{out}}{dt} \Longleftrightarrow \rho c \int \limits_\Omega \frac{d\theta}{dt} dV = k\int \limits_{\Omega} \laplacianTemp dV $$
+
+Since we assumed that the temperature field $\theta$ is smooth enough, and the volume $\Omega$ was arbitrary, the functions under the integral must be equal throughout the domain $\mathbb{R}^3$:
+
+$$ \rho c\frac{d\theta}{dt} = k \laplacianTemp $$
+
+Unfolding the material derivative $\frac{d\theta}{dt}$ and dividing the equation by $\rho c$ we obtain the advection-diffusion equation, describing  diffusion of temperature simultaneous with transfer of mass by the velocity field. In other words, the equation takes both the heat conduction and convection processes into account:
+
+\begin{equation} \label{heat_eq}
+\partialTimeTemp + \inertTermTemp = \kappa \laplacianTemp 
+\end{equation}
+
+
+The coefficient $\kappa$ is called \emph{thermal conductivity} and is a measure of the intensity of the diffusion of temperature:
+
+$$ \kappa = \frac{k}{\rho c}, ~ [\kappa] = \frac{L^2}{T}$$
+
+Naturally, boundary conditions must be supplied in order for the equation (\ref{heat_eq}) to describe a concrete system.
+
+\section{Nondimensionalization of the Temperature Advection-Diffusion Equation}
+
+The nondimensionalization of the temperature advection-diffusion (\ref{heat_eq}) is accomplished in the same manner as in the case of Navier-Stokes equations in chapter \ref{navier_stokes}. 
+
+However, now it is necessary to introduce a new parameter, characteristic temperature of the system $\Theta$. Operationally, it can be defined as the average temperature of the field or the difference between the maximum and the minimum temperatures.
+
+According to Buckingham $\Pi$-theorem \cite{barenblatt1} (cf. also \nameref{appendix_pi}), the system can be described by $7 - 4 = 3$ nondimensional parameters, since there are $7$ dimensional parameters describing the heat transfer ($\mathbf{r}, \velocity, \rho, \nu, g, \theta, t$) among which there are $4$ independent units of measurements (mass, length, time, temperature).
+
+By performing a change of variables 
+
+$$ t^{\prime}  = \frac{t}{T},~ \velocityNondim = \frac{\velocity}{V},~ \mathbf{r^{\prime}} = \frac{\mathbf{r}}{L},~ \theta^{\prime} = \frac{\theta}{\Theta} $$ 
+
+and substituting into the equation (\ref{heat_eq}), dropping the primes for notational convenience, we obtain
+
+\begin{equation} \label{heat_eq_preNondim}
+ \frac{\Theta}{T} \partialTimeTemp + \frac{\Theta V}{L} \inertTermTemp = \frac{\kappa \Theta}{L^2} \laplacianTemp 
+\end{equation}
+
+As in the case of Navier-Stokes equations in chapter \ref{navier_stokes}, it is necessary to choose a perspective in order to proceed with nondimensionalization.
+
+\subsection{Advective Term Perspective}
+
+From the point of view of the convection (inertial) term, the equation (\ref{heat_eq_preNondim}) becomes
+
+\begin{equation} \label{heat_eq_inertNondim}
+ St~ \partialTimeTemp + \inertTermTemp = \frac{1}{Pe} \laplacianTemp  
+\end{equation}
+ 
+Since Strouhal number $St$ has the same meaning as in nondimensionalization of Navier-Stokes equations discussed in chapter \ref{navier_stokes}, only the Peclet number $Pe$ deserves a discussion here.
+
+\subsubsection{Peclet Number}
+
+The Peclet number 
+
+$$ Pe = \frac{LV}{\kappa} = \frac{\frac{L^2}{\kappa}}{\frac{L}{V}} = \frac{T_{conduction}}{T_{inertia}} $$
+
+is a measure of the vigour of convection. It can be interpreted as a ratio of conduction and convection time scales, inertial time scale being equivalent to convection time scale. In other words, it indicates which mechanism of heat transfer, convective or conductive, is dominant in the flow.
+
+It is possible to consider the Peclet number as a product of Reynolds and Prandtl number:
+
+$$ Pe = \frac{LV}{\kappa} = \frac{LV}{\nu} \frac{\nu}{\kappa} = RePr, ~ Pr = \frac{\nu}{\kappa} $$
+
+Since the Prandtl number characterizes the medium but not the flow itself, Peclet number can be viewed, to some degree, as a Reynolds number in the context of heat transfer.
+
+\subsubsection{Prandtl Number}
+
+Prandtl number
+
+$$ Pr = \frac{\nu}{\kappa} = \frac{\frac{L^2}{\kappa}}{\frac{L^2}{\nu}} = \frac{T_{conduction}}{T_{viscosity}} $$
+
+can be interpreted as a ratio of conduction and viscosity time scales. Since it does not involve any kinematic or dynamic quantities like characteristic length or speed, Prandtl number characterizes the properties of the medium but it does not characterize the properties of the flow. 
+
+In other words, Prandtl number is constant for different types of flow in the same medium. It simply characterizes which mechanism of energy dissipation, viscous or heat conduction, is dominant.
+
+\subsection{Conduction Term Perspective}
+
+From the point of view of the conduction (diffusion) term, the equation (\ref{heat_eq_preNondim}) becomes
+
+\begin{equation} \label{heat_eq_diffusNondim}
+\frac{1}{Fo} \partialTimeTemp + Pe ~\inertTermTemp = \laplacianTemp  
+\end{equation}
+
+The only new dimensionless parameter is the Fourier number $Fo$.
+
+\subsubsection{Fourier Number}
+
+The Fourier number
+
+$$ Fo = St Pe = \frac{\kappa T}{L^2} = \frac{T}{\frac{L^2}{\kappa}} = \frac{T}{T_{conduction}}$$
+
+is a ratio of the characteristic time scale of the system and the conduction time scale. It is a measure of how stationary the heat transfer process is. The smaller the time scale of a certain process, the more dominant that process is in the information exchange in the system. 
+
+For example, if the conduction time scale is much smaller than the characteristic time scale of the system (e.g. period of oscillation of a magnetic field), Fourier number will be large and the heat transfer can be considered stationary. In an opposite case, if the frequency, and hence the energy, of the alternating magnetic field is very large, than the fluid will respond to this disturbance and the heat transfer process will be nonstationary.
+
+In other words, heat conduction, due to its dissipative nature, stabilizes the system, whereas external disturbances usually destabilize it, thus making the process inherently nonstationary.

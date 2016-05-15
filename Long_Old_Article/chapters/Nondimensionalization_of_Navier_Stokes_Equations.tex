@@ -1,0 +1,235 @@
+
+
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity \cdot \nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime} \cdot \nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+
+\section{Introduction}
+
+The purpose of this chapter is to derive the nondimensional form of the incompressible Navier-Stokes equations. Special attention is devoted to the physical meaning of the nondimensional parameters. It is shown that the procedure of nondimensionalization and interpretation of its results depend crucially on the choice of perspective, which can be either that of inertial flow, or of viscous flow. Both perspectives are discussed and their importance explained. 
+
+\section{Navier-Stokes Equations}
+
+The flow of an incompressible viscous fluid in a homogeneous gravitational field is described by the following set of equations known as Navier-Stokes equations for incompressible flow\cite{gratz}:
+\begin{equation} \label{NS1}
+\partialTimeVel + \inertTermVel = -g\surfaceNormal - \frac{1}{\rho}\pressGrad + \nu\laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2}
+\divergence\velocity = 0  
+\end{equation}
+
+Where
+
+\begin{itemize}
+
+\item[] $\surfaceNormal$ is the unit normal to the surface of the Earth.
+\item[] $ [\rho] = M L^{-3} $ is density assumed constant.
+\item[] $[g] = LT^{-2} $ is the acceleration due to uniform gravitational field.
+\item[] $ [\velocity] = L T^{-1} $ is the velocity field of the flow.
+\item[] $ [\nu] =[\frac{\mu}{\rho}] = L^{2} T^{-1} $ is the kinematic viscosity of the fluid assumed constant.
+\item[] $ [p] = M L^{-1} T^{-2} $ is \emph{dynamic} pressure (i.e., the one due to inertial movement of fluid, which should not be confused with thermodynamic pressure).
+
+\end{itemize}
+
+Naturally, these equations must be supplemented by appropriate boundary conditions in order to describe a closed well-posed system. 
+
+\section{Nondimensionalization of Navier-Stokes Equations}
+
+Dimensionless quantities allow us to identify a family of similar physical processes, i.e. those which are invariant under the change of scale. Thus, \emph{dimensionless quantities parametrize the family of similar processes}. Since physical processes are approximately described by equations, it is natural to expect that the equations governing similar processes are also parametrized by dimensionless parameters. Therefore, it is possible to \emph{nondimensionalize} the equations and thus describe how processes change quantitatively in response to the change of dimensionless parameters. 
+
+Naturally, it is advantageous to nondimensionalize the equations before they are solved numerically since all the information about the process's characteristics can be stored in a small number of dimensionless parameters, also reducing the possible confusion about which units to store the dimensional parameters in \cite{barenblatt1}. (cf. also \nameref{appendix_pi})
+
+In order to non-dimensionalize the Navier-Stokes equations, it is necessary to introduce the characteristic parameters of the flow, namely:
+
+\begin{itemize}
+
+\item[] $ L $ - characteristic length scale.
+\item[] $ V $ - characteristic velocity scale (e.g. average or maximum speed of the flow).
+\item[] $ T $ - characteristic time scale.
+\item[] $ P $ - characteristic pressure scale (e.g. pressure difference between the ends of a pipe).
+
+\end{itemize}
+
+Nondimensionalization is accomplished by a change of variables in which the original variables $t, \mathbf{x}, \velocity, p$ are expressed as fractions of the characteristic parameters of the flow:
+
+$$ t^{\prime}  = \frac{t}{T},~ \velocityNondim = \frac{\velocity}{V},~ \mathbf{x^{\prime}} = \frac{\mathbf{x}}{L},~ p^{\prime} = \frac{p}{P} $$ 
+
+Solving for the old dimensional variables and substituting them into (\ref{NS1}) and (\ref{NS2}) yields, dropping the primes for notational convenience:
+
+\begin{equation} \label{NS1-preNondim}
+\frac{V}{T} \partialTimeVel + \frac{V^2}{L} \inertTermVel = -g\surfaceNormal - \frac{P}{\rho L}\pressGrad + \frac{\nu V}{L^2}\laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-preNondim}
+\divergence\velocity = 0 
+\end{equation}
+
+\subsection{Perspective of Nondimensionalization} \label{perspective}
+
+To continue with nondimensionalization of the equations (\ref{NS1}) and (\ref{NS2}), it is necessary to choose a perspective. In other words, which factor are we most interested in considering our particular flow? 
+
+In a case when we are interested in weighing the influence of inertia compared to other factors, the coefficients in the equation (\ref{NS1-preNondim}) must be rearranged so as to yield $1$ in front of the inertial term, namely $\inertTermVel$. Such flows arise in contexts when fluids are not viscous and the characteristic speed of the flow is very large, e.g. in a flow past an airfoil.
+
+In other cases, it is interesting to weigh other factors influencing the flow against the effects of viscosity, such as in the problems of mantle convection. In that case, the coefficients must be rearranged so as to yield $1$ in front of the viscous term, namely $\laplacianVel$. 
+
+\subsection{Inertial Flow Perspective}
+
+According to \nameref{appendix_pi} \cite{barenblatt1}, the system can be described by $7 - 3 = 4$ nondimensional parameters, since there are $7$ dimensional parameters describing the flow ($\mathbf{x}, \velocity, \rho, \nu, g, p, t$) among which there are $3$ independent units of measurements: mass, length, and time ($M, L, T$).
+
+From the point of view of the inertial terms, nondimensionalization leads to the following equations:
+
+\begin{equation} \label{NS1-inertNondim}
+St~ \partialTimeVel + \inertTermVel = -\frac{1}{2Fr} \surfaceNormal - \frac{1}{2 Eu}\pressGrad + \frac{1}{Re}\laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-inertNondim}
+\divergence\velocity = 0 
+\end{equation}
+
+The four nondimensional parameters have a concrete physical meaning.
+
+\subsubsection{Strouhal Number}
+
+$$St = \frac{L}{VT}$$
+
+is a measure of how stationary the flow is. It is a ratio of characteristic time of inertial motion and the characteristic time of the flow:
+
+$$ St = \frac{\frac{L}{V}}{T} = \frac{T_{inertia}}{T}$$
+
+For example, if the inertial flow of plasma is much faster than the period of oscillation of an external magnetic field ($ T_{inertia} \ll T$), then the fluid simply cannot measurably respond to such low-energy influence of the external field, and the flow can be treated as approximately stationary.
+
+\subsubsection{Froude Number}
+
+$$ Fr = \frac{V^2}{2gL} $$
+
+is a measure of the influence of the gravitational field on the inertial flow. It can be interpreted as a ratio of kinetic energy density (i.e., energy density of the inertial flow) and the density of the work done by the gravitational field:
+
+$$ Fr = \frac{V^2}{2gL}  = \frac{\rho V^2}{2\rho g L} = \frac{KE}{Work_{gravity}}$$
+
+For example, large Froude numbers characterize the flow of water from a fire hose, where the jet is barely deflected from its rectilinear trajectory because of its high initial kinetic energy.
+
+\subsubsection{Euler Number}
+
+$$ Eu = \frac{\rho V^2}{2P} $$
+
+is a measure of the influence of pressure on the inertial flow. It can be interpreted as a ratio of kinetic energy density and the work done by the pressure:
+
+$$ Eu = \frac{\rho V^2}{2P} = \frac{KE}{Work_{pressure}} $$
+
+The Euler number is large in highly inertial flows where pressure gradients do not significantly deflect the flow, for example, in waterfalls.
+
+\subsubsection{Reynolds Number}
+
+$$ Re = \frac{LV}{\nu} $$
+
+is a measure of the influence of viscosity on the inertial flow. It can be interpreted as a ratio of time scales of viscous and inertial processes:
+
+$$ Re = \frac{LV}{\nu}  = \frac{\frac{L^2}{\nu}}{\frac{L}{V}} = \frac{T_{viscosity}}{T_{inertia}}$$
+
+Another way to interpret the Reynolds number is as the ratio of the characteristic kinetic energy to the characteristic viscous shear stress $\tau$ of the flow \cite[p. 484]{sivukhin}:
+
+$$ KE \sim \rho V^2,~ \tau \sim \frac{\rho \nu V}{L},~ \frac{KE}{\tau} = \frac{LV}{\nu} = Re $$
+
+In the case in which the energy dissipation due to viscosity is too slow ($ T_{inertia} \ll T_{viscosity}$), viscosity has little influence on the inertial motion of the fluid.
+
+\subsubsection{Large Reynolds Numbers and Turbulence}
+
+Thus, large Reynolds numbers correspond to small energy dissipation by internal friction in the fluid and indicate the dominance of the inertial flow. 
+
+\emph{Turbulence} occurs precisely in such flows. Indeed, highly energetic physical systems are, in general, unstable. The dissipation of energy provides the mechanism for stabilization. Since for large Reynolds numbers viscosity does not dissipate adequate amounts of energy, a fundamentally different mechanism of energy dissipation is needed. Such mechanism is precisely provided by the developed turbulence, whereby the initial kinetic energy of the laminar flow is distributed on a spectrum of scales of stochastic pulsations of the fluid.
+
+Thus, turbulence is caused by the interaction of smaller and larger scales of motion in the fluid, and these interactions provide a mechanism for energy dissipation. A remarkable example of the importance of turbulence in nature has been suggested by A.N. Kolmogorov\cite[pp. 185-186]{barenblatt_fracture}. He estimated that, in the absence of turbulence, the speed of the flow in the Volga river would be on the order of $400, 000$ miles per hour, which would make life completely impossible along its shores.
+
+\subsection{Viscous Flow Perspective}
+
+Equations (\ref{NS1-inertNondim}) and (\ref{NS2-inertNondim}) are suitable for eliminating negligible factors when the inertial flow is known to be dominant. For example, if the Reynolds number is large, then it is plausible to neglect the viscosity term in the equation. 
+
+However, what if we are concerned with eliminating negligible factors knowing that the flow is inherently viscous? This context arises, for example, in problems involving mantle convection. Naturally, previous equations do not provide information about the relative importance of other factors compared to viscosity. Therefore, we must transform the equations (\ref{NS1-inertNondim}) and (\ref{NS2-inertNondim}) to reflect a viscous flow perspective.
+
+From the perspective of viscous flow, the equations (\ref{NS1-inertNondim}) and (\ref{NS2-inertNondim}) become
+
+\begin{equation} \label{NS1-viscNondim}
+Re St~ \partialTimeVel + Re ~\inertTermVel = -\frac{Re}{2Fr} \surfaceNormal - \frac{Re}{2 Eu}\pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-viscNondim}
+\divergence\velocity = 0 
+\end{equation}
+
+The new dimensionless coefficients also have a physical interpretation.
+
+\subsubsection{Reynolds Number Times Strouhal Number}
+
+$$ ReSt = \frac{LV}{\nu} \frac{L}{VT} = \frac{L^2}{\nu T} $$
+
+is a measure of how stationary the flow is, albeit now from a point of view of a viscous flow.
+
+It can be interpreted as the ratio of the viscosity time scale to the characteristic time scale of the flow:
+
+$$ ReSt = \frac{L^2}{\nu T} = \frac{\frac{L^2}{\nu}}{T} = \frac{T_{viscosity}}{T}$$
+
+\subsubsection{Reynolds Number Over Froude Number}
+
+$$ \frac{Re}{2Fr} = \frac{LV}{\nu}\frac{gL}{V^2} = \frac{gL^2}{\nu V} $$ 
+
+is a measure of the influence of the gravitational field in a viscous flow. It can be interpreted as a ratio of viscosity and gravity time scales:
+
+$$ \frac{Re}{2Fr} = \frac{gL^2}{\nu V} = \frac{\frac{L^2}{\nu}}{\frac{V}{g}} = \frac{T_{viscosity}}{T_{gravity}} $$ 
+
+\subsubsection{Reynolds Number Over Euler Number}
+
+$$ \frac{Re}{Eu} = \frac{LV}{\nu} \frac{P}{\rho V^2} = \frac{PL}{\rho\nu V}  = \frac{P}{\tau} $$
+
+This coefficient can be interpreted as a ratio characterizing the balance of pressure and viscous shear stresses $\tau$ in the flow.
+
+\subsubsection{Nondimensional Numbers as Ratios of Time Scales}
+
+Because viscous dissipation is a process that takes place on a molecular scale, it is natural to expect the nondimensional equations to depend on ratios of time scales associated with microscopic processes. In contrast, in the case of the inertial perspective the nondimensional parameters were mostly ratios characterizing the energy balance of various macroscopic processes in the flow. 
+
+This can be explained by the fact that microscopic processes are determined by local relaxation times. On the other hand, quantities like kinetic energy density are macroscopic and do not influence local relaxation times, which explains why they are not present in the nondimensional parameters when the viscous flow perspective is considered.
+
+\subsection{Further Investigation of the System}
+
+Thus, it is evident that nondimensionalization is not a deterministic process since its outcome depends on the additional information available to the researcher. 
+
+Firstly, one must choose a perspective, or a point of view, in order to obtain useful information from the nondimensional forms of the equations. Otherwise, a common mistake may happen when terms that are not actually negligible are neglected because of the incorrect interpretation of the nondimensional numbers. For example, the limit of vanishing Reynolds number in the inertial perspective does not imply that the only remaining term in the equation is the viscous term. Indeed, from the perspective of viscosity, Reynolds number is multiplied by other dimensionless numbers in front of other terms such as the gradient of pressure, so the asymptotics of these compound terms must now be considered as well. 
+
+Secondly, without further specification of the system it is impossible to simplify the equations further. Either one must estimate the nondimensional numbers by direct measurements of characteristic parameters of the flow, or introduce additional relationships between them. For example, the viscosity time scale can be chosen as a characteristic time scale, and characteristic pressure can be identified with the characteristic viscous shear stress of the flow.

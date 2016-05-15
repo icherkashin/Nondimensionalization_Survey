@@ -1,0 +1,218 @@
+
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity\nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+
+\providecommand{\partialTimeTemp}{\partial_t\theta}
+\providecommand{\inertTermTemp}{(\velocity\nabla)\theta}
+\providecommand{\tempGrad}{\nabla \theta}
+\providecommand{\laplacianTemp}{\Delta\theta}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime}\nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+\section{Introduction} 
+
+The equations of the Boussinesq approximation are considered in the context of mantle convection. The physical considerations underlying the appropriate choice of time and pressure scales for nondimensionalization of these equation are explained, which is commonly not presented in the literature. The physical meaning of all nondimensional numbers arising after nondimensionalization is discussed. Finally, the equations of mantle convection are obtained in the limit of infinite Prandtl number, which results in a system depending on a single nondimensional parameter, the Rayleigh number. 
+
+\section{Choice of Scales}
+
+In chapter \ref{boussinesq} we obtained nondimensionalized form of the equations of Boussinesq approximation from the perspective of the inertial flow\footnote{The meaning of the ``prespective of nondimensionalization'' is explained in (\ref{perspective})}:
+
+\begin{equation} \label{NS1-inertNondim_boussinesq}
+\partialTimeVel + \inertTermVel = \frac{g\Theta \beta T^2}{L} \theta \surfaceNormal - \frac{PT^2}{\rho L^2} \pressGrad + \frac{\nu T}{L^2} \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-inertNondim_boussinesq}
+\divergence \velocity = 0
+\end{equation}
+\begin{equation} \label{heat_eq_inertNondim_boussinesq}
+\partialTimeTemp + \inertTermTemp = \frac{\kappa T}{L^2} \laplacianTemp  
+\end{equation} 
+
+However, mantle convection is characterized by very low Reynolds number flows, which implies that a more appropriate point of view for nondimensionalization is the point of view of the viscosity term in the equation (\ref{NS1-inertNondim_boussinesq}). In order to transform the equations to conform with the new scaling perspective, we multiply the equation (\ref{NS1-inertNondim_boussinesq}) by 
+
+$$ \frac{L^2}{\nu T} $$
+
+which makes the dimensionless coefficient in front of $\laplacianVel$ a unity.
+
+Thus, the equations (\ref{NS1-inertNondim_boussinesq} - \ref{heat_eq_inertNondim_boussinesq}) become
+
+\begin{equation} \label{NS1_viscNondim_boussinesq}
+\frac{L^2}{\nu T} (\partialTimeVel + \inertTermVel) = \frac{g\Theta \beta T L}{\nu} \theta \surfaceNormal - \frac{PT}{\rho \nu} \pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2_viscNondim_boussinesq}
+\divergence \velocity = 0
+\end{equation}
+\begin{equation} \label{heat_eq_viscNondim_boussinesq}
+\partialTimeTemp + \inertTermTemp = \frac{\kappa T}{L^2} \laplacianTemp  
+\end{equation} 
+
+Further investigation of these equations requires additional information about the time and pressure scales, $T$ and $P$.
+
+\subsection{Time Scale}
+
+There are two natural choices of scales in the context of the highly viscous flows that are characteristic of mantle convection. \cite{getling}
+
+The first choice is based on the viscosity time scale:
+
+$$ T_{viscosity} = \frac{L^2}{\nu} $$
+
+The second choice is based on the heat conduction time scale: 
+
+$$ T_{conduction} = \frac{L^2}{\kappa} $$
+
+In order to choose the appropriate scale for the context of mantle convection, we observe that their ratio is equal to the Prandtl number:
+
+$$ \frac{T_{conduction}}{T_{viscosity}} = \frac{\nu}{\kappa} = Pr $$ 
+
+A commonly used approximation for the dynamics of Earth's mantle is the limit of infinite viscosity, which is equivalent to the limit of infinite Prandtl number since thermal conductivity is usually fixed or bounded:
+
+$$ \nu \longrightarrow \infty \Longleftrightarrow Pr \longrightarrow \infty$$
+
+Physically, this limit can be interpreted as
+
+$$ T_{viscosity} \ll T_{conduction} $$
+
+or 
+
+$$ T_{viscosity} \longrightarrow 0 $$
+
+Physically, this limit means that information due to viscous interactions propagates infinitely fast, and infinitely fast processes cannot serve as a measure of other processes because they are infinitely slow relative to infinitely fast processes. Thus, the viscosity time scale becomes singular in the common mantle convection approximation, which makes it an inappropriate choice for the time scale.
+
+Therefore, the only choice left is the time scale associated with heat conduction,
+
+$$ T = T_{conduction} = \frac{L^2}{\kappa} $$
+
+Another argument supporting this choice of scale is the fact that heat conduction takes place regardless of the macroscopic flow of the fluid. Since initially the fluid is at rest in the common problems of mantle convection, measurable viscous dissipation processes cannot start until the fluid has been set in an adequately intense macroscopic flow. At the same time, heat conduction starts immediately because a gradient of temperature is always present in the mantle.
+
+\subsection{Pressure Scale}
+
+In chapter \ref{stokes} we justified an appropriate pressure scale for low Reynolds number flows based on an estimate of viscous shear stress:
+
+$$ P = \frac{\rho \nu V}{L} = \frac{\rho \nu}{T} $$
+
+Following \cite[pp. 433-434]{leal}, we shall verify that this choice of scale is appropriate by comparing it with another possible choice of scale based on kinetic energy.
+
+Given $9$ parameters describing the convection ($\mathbf{x}, \velocity, \rho, \nu, \kappa, g, p, \theta, t$) and $4$ units of measurement (length, time, mass, temperature), by Buckingham's $\Pi$-theorem we can form $9 - 4 = 5$ nondimensional parameters describing the system. \cite{barenblatt1} (cf. also \nameref{appendix_pi})
+
+From (\ref{NS1_viscNondim_boussinesq}), (\ref{NS2_viscNondim_boussinesq}), and (\ref{heat_eq_viscNondim_boussinesq}) we see that they are the following:
+
+$$ Pr = \frac{\nu}{\kappa} $$
+$$ \frac{PT}{\rho \nu} $$
+$$  \frac{\rho L^2}{PT^2}$$ 
+$$ Ra = \frac{g\Theta \beta L^3}{\nu\kappa} $$
+$$ \frac{\kappa T}{L^2} $$
+
+From this we can see that there are two choices of nondimensionalizing the pressure:
+
+$$ P_1 = \frac{\rho \nu}{T} $$
+$$ P_2 = \frac{\rho L^2}{T^2}$$ 
+
+Their ratio is :
+
+$$ \frac{P_1}{P_2} = \frac{\nu T}{L^2} = \frac{T}{T_{viscosity}} $$
+
+Given our choice of time scale, we find that the ratio is equal to the Prandtl number:
+
+$$ T = T_{conduction} = \frac{L^2}{\kappa} $$
+$$ \frac{P_1}{P_2} = \frac{T_{conduction}}{T_{viscosity}} = \frac{\nu}{\kappa} = Pr \Longleftrightarrow P_2 = \frac{1}{Pr} P_1 $$
+
+Considering these choices of scale, the coefficient multiplying the gradient of pressure in the equation (\ref{NS1_viscNondim_boussinesq}) becomes either 
+
+$$ \frac{P_1T}{\rho \nu} = 1$$
+
+or 
+
+$$ \frac{P_2T}{\rho \nu} = \frac{1}{Pr}\frac{P_1T}{\rho \nu} = \frac{1}{Pr}$$
+
+In the limit $ Pr \longrightarrow \infty$ the scale associated with $P_2$ implies that the gradient of pressure term in the equation (\ref{NS1_viscNondim_boussinesq}) will vanish. This contradicts the physical fact that pressure influences the flow even at low Reynolds numbers.\cite[pp. 433-434]{leal}
+
+Thus, the appropriate choice of characteristic pressure scale is, as in chapter \ref{stokes}, associated with viscous shear stress:
+
+$$ P = P_1 = \frac{\rho \nu}{T} = \frac{\rho \nu \kappa}{L^2}$$
+
+\section{Nondimensional Form of Equations}
+
+Considering the choices of scales discussed above, the equations (\ref{NS1_viscNondim_boussinesq}), (\ref{NS2_viscNondim_boussinesq}), and (\ref{heat_eq_viscNondim_boussinesq}) finally become
+
+\begin{equation} \label{NS1_viscNondim_boussinesq_time}
+\frac{1}{Pr} (\partialTimeVel + \inertTermVel) = Ra ~\theta \surfaceNormal - \pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2_viscNondim_boussinesq_time}
+\divergence \velocity = 0
+\end{equation}
+\begin{equation} \label{heat_eq_viscNondim_boussinesq_time}
+\partialTimeTemp + \inertTermTemp = \laplacianTemp  
+\end{equation} 
+
+The only new nondimensional parameter is the Rayleigh number $Ra$.
+
+\subsubsection{Rayleigh Number}
+
+Rayleigh number 
+
+$$ Ra = \frac{g\Theta \beta L^3}{\nu\kappa} = \frac{g\Theta \beta L T}{\nu} = \frac{g\Theta \beta T}{\frac{\nu}{L}} = \frac{\rho V_{buoyancy}}{\rho V_{viscosity}} $$
+
+is a measure of the influence of temperature on the mechanical motion of the fluid. 
+
+It can be interpreted as a ratio of momentum gained due to the buoyant force, resulting from thermal expansion of the fluid, and the momentum dissipated by the viscosity. 
+
+Another interpretation of Rayleigh number is a ratio of the work of buoyant forces and viscous shear stress:
+
+$$ Ra = \frac{g\Theta \beta L^3}{\nu\kappa} = \frac{\rho g\Theta \beta L}{\frac{\rho \nu}{T}} = \frac{E_{buoyancy}}{P_{viscosity}} $$
+
+In other words, Rayleigh number measures how far from the equilibrium a system is: indeed, while the buoyant force destabilizes the motion, viscosity stabilizes it through energy dissipation.
+
+\subsection{Limit of Infinite Prandtl Number}
+
+A common approximation in mantle convection problems is the limit of infinite Prandtl number. By taking this limit in the equations (\ref{NS1_viscNondim_boussinesq_time}), (\ref{NS2_viscNondim_boussinesq_time}), and (\ref{heat_eq_viscNondim_boussinesq_time}), we obtain the following system of equations in nondimensional form:
+
+\begin{equation} \label{NS1_viscNondim_boussinesq_prandtl}
+\laplacianVel = \pressGrad - Ra ~\theta \surfaceNormal
+\end{equation}
+\begin{equation} \label{NS2_viscNondim_boussinesq_prandtl}
+\divergence \velocity = 0
+\end{equation}
+\begin{equation} \label{heat_eq_viscNondim_boussinesq_prandtl}
+\partialTimeTemp + \inertTermTemp = \laplacianTemp  
+\end{equation} 
+
+As we can see, the only parameter defining the system is the Rayleigh number, which makes it especially suitable for numerical experiments.

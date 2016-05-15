@@ -1,0 +1,159 @@
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+\providecommand{\ort}{\begin{pmatrix} 0 \\ \vdots \\ 1 \\ \vdots \\ 0 \end{pmatrix}}
+
+\providecommand{\X}{\begin{pmatrix} [X_1] & \hdots & [X_n] \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity\nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+
+\providecommand{\partialTimeTemp}{\partial_t\theta}
+\providecommand{\inertTermTemp}{(\velocity\nabla)\theta}
+\providecommand{\tempGrad}{\nabla \theta}
+\providecommand{\laplacianTemp}{\Delta\theta}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime}\nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+
+
+% \input{structure.tex} % Include the structure.tex file which specified the document structure and layout
+
+\hyphenation{Fortran hy-phen-ation} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
+
+%----------------------------------------------------------------------------------------
+%	HEADERS
+%----------------------------------------------------------------------------------------
+
+% \renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
+%\renewcommand{\subsectionmark}[1]{\markright{\thesubsection~#1}} % Uncomment when using the twoside option - this modifies the header on odd pages
+% \lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
+
+% \pagestyle{scrheadings} % Enable the headers specified in this block
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LISTS OF FIGURES AND TABLES
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+ 
+The Buckingham $\Pi$-Theorem is discussed both from the perspective of revealing the rank of a set of physical quantities, as well as from the perspective of reducing the number of parameters in an equation linking physical quantities. It is shown that the Buckingham $\Pi$-Theorem is simply a consequence of a fundamental theorem of linear algebra relating the dimensions of the image, kernel, and the number of columns of a matrix.   
+% 
+% 
+% \setcounter{tocdepth}{2} % Set the depth of the table of contents to show sections and subsections only
+% 
+% \tableofcontents % Print the table of contents
+% 
+% \newpage % Start the article content on the second page, remove this if you have a longer abstract that goes onto the second page
+
+\section{Tensor Notation}
+
+As will be seen later, tensor notation is convenient for writing the equations of fluid dynamics. The purpose of this notation is 
+to express the sums of large number of terms compactly, which is achieved by implicit summation over repeating indeces: a convention due to Einstein\cite{landau}.
+
+For our purposes, let's establish the following conventions: 
+\begin{enumerate}
+ \item Spatial coordinates $xyz$ are denoted by numbers from $1$ to $3$
+ \item $x^i$ is $i$-th component of a vector $\mathbf{x}$, $\partial_i \equiv \frac{\partial}{\partial x^i}$
+ \item Summation is implicit over indices repeated within the same expression (e.g. $a_ib_i = \sum_{i=1}^{3}a_ib_i$)
+\end{enumerate}
+
+For example, matrix-vector multiplication is expressed elegantly in tensor notation: $$(A\mathbf{x})^i = \sum_{j=1}^{n}a_{ij}x^j \Longleftrightarrow A\mathbf{x} \equiv a_{ij}x^j$$
+
+In this case, $i$ is called \emph{running index} since it denotes the component of the resulting vector which can be chosen freely by us, whereas the index $j$ is called \emph{dummy index}, since it is only used in the summation and has no other significance. 
+
+To further illustrate the convenience of this notation, consider an example of divergence of a vector field: $$\nabla \cdot \velocity = \partial_xv^{x} + \partial_yv^{y} + \partial_zv^{z} = \sum_{k=1}^{3}\partial_kv^k \equiv \partial_kv^{k}$$
+ 
+\subsection{Navier-Stokes Equations in Tensor Notation}
+ 
+Considering previous explanation of tensor notation, the Navier-Stokes equations for incompressible flow can be written thus:
+ 
+\begin{equation} \label{NS1-Tensor}
+\partial_tv^i + v^k\partial_kv^i = -g\delta_{i3} - \frac{1}{\rho}\partial_ip + \nu \partial_k\partial_kv^i  
+\end{equation}
+\begin{equation} \label{NS2-Tensor}
+\partial_kv^{k} = 0  
+\end{equation}
+
+where $\delta_{ij}$ is \emph{Kronecker's delta} function, which is $0$ except when $i=j$: then it is equal to $1$.
+
+\section{Poisson Equation for Pressure Field in an Incompressible Flow}
+
+When the flow is incompressible, the pressure field is determined completely by the velocity field of the flow. This can be shown with relative ease by using tensor notation discussed above.
+
+Indeed, let's apply divergence operator to equation (\ref{NS1}) term by term:
+
+\begin{enumerate}
+ \item $\divergence \partial_t\velocity = \partial_t \ (\divergence \velocity) = 0$
+ \item $\divergence [\inertTermVel] = \partial_l(\inertTermVel)^l = \partial_l(v^k\partial_kv^l) = \partial_lv^k\partial_kv^l + v^k\partial_l\partial_kv^l$ \\Since $v^k\partial_l\partial_kv^l = v^k\partial_k(\partial_lv^l) = v^k\partial_k (0) = 0 \implies \divergence [\inertTermVel] = \partial_lv^k\partial_kv^l$
+ \item $\divergence g\surfaceNormal = 0$\footnote{Furthermore, this is true for any potential field when no sources are present inside the domain.}
+ \item $\divergence\frac{1}{\rho}\pressGrad = \frac{1}{\rho}\Delta p$
+ \item $\divergence (\nu\Delta\velocity) = \nu\partial_l(\Delta\velocity)^l = \nu\partial_l\partial_k\partial_kv^l = \nu\partial_k\partial_k(\partial_lv^l) = 0$
+\end{enumerate}
+
+Thus, only terms $2$ and $4$ remain in (\ref{NS1}), thus yielding the \emph{Poisson equation} for pressure:
+
+\begin{equation}
+\Delta p = - \rho ~\partial_lv^k\partial_kv^l
+\end{equation}
+
+This means that equations (\ref{NS1}) and (\ref{NS2}) can be written in an equivalent form, using tensor notation, which relates pressure and velocity fields more directly:
+
+\begin{equation} \label{NS1-Poisson}
+\partialTimeVel + \inertTermVel = -g\surfaceNormal - \frac{1}{\rho}\pressGrad + \nu\laplacianVel 
+\end{equation}
+\begin{equation} \label{NS2-Poisson}
+\Delta p = - \rho ~\velocityPressureTensor
+\end{equation}
+
+The utility of tensor notation is evident: without Einstein's convention, equation (\ref{NS2-Poisson}) has $6$ terms, even after complete simplification, versus one term in its compact tensor representation. Furthermore, tensor notation allowed us to compute complicated quantities such as $\divergence [\inertTermVel]$ with just a few steps and basic knowledge of algebraic properties of finite sums and differentiation.
+
+Finally, the equation (\ref{NS2-Poisson}) is necessary for the dimensional and scaling analysis of the Navier-Stokes equation, because the fact that the velocity field has zero divergence is scale-invariant, whereas equation (\ref{NS2-Poisson}) can provide information on the relative importance of pressure and velocity fields given a particular choice of scale. 
+
+\section{Laplace Equation for Pressure in Stokes Equations} \label{pressure_laplace}
+
+Considering the estimations of the nondimensional parameters presented in (\ref{stokes_parameters}), the equations (\ref{NS1-viscNondim}) and (\ref{NS2-viscNondim}) become:
+
+\begin{equation} 
+Re(\partialTimeVel + \inertTermVel) = -\frac{gL^2}{\nu V} \surfaceNormal - \pressGrad + \laplacianVel 
+\end{equation}
+\begin{equation} 
+\pressLaplacian = Re ~\velocityPressureTensor
+\end{equation}
