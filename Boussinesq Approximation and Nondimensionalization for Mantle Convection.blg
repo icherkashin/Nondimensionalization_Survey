@@ -1,0 +1,62 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Boussinesq Approximation and Nondimensionalization for Mantle Convection.aux
+The style file: amsplain.bst
+Database file #1: bibliography.bib
+A bad cross reference---entry "boussinesq_and_his_approximation"
+refers to entry "http://dx.doi.org/10.1016/S1631-0721(03)00120-7.", which doesn't exist
+A bad cross reference---entry "plate"
+refers to entry "TID-25465", which doesn't exist
+A bad cross reference---entry "malkus1"
+refers to entry "PB 186314", which doesn't exist
+A bad cross reference---entry "malkus2"
+refers to entry "PB 189618", which doesn't exist
+Warning--I didn't find a database entry for "TID-25465"
+Warning--I didn't find a database entry for "PB 186314"
+Warning--I didn't find a database entry for "PB 189618"
+Warning--I didn't find a database entry for "http://dx.doi.org/10.1016/S1631-0721(03)00120-7."
+Warning--to sort, need author or key in cig_mantle_convection
+Warning--missing year in boussinesq_validity
+Warning--missing year in mantle_conv_in_earth_and_planets
+You've used 27 entries,
+            2213 wiz_defined-function locations,
+            661 strings with 7590 characters,
+and the built_in function-call counts, 7024 in all, are:
+= -- 604
+> -- 237
+< -- 1
++ -- 98
+- -- 71
+* -- 538
+:= -- 1137
+add.period$ -- 27
+call.type$ -- 27
+change.case$ -- 118
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 310
+empty$ -- 704
+format.name$ -- 71
+if$ -- 1466
+int.to.chr$ -- 0
+int.to.str$ -- 27
+missing$ -- 64
+newline$ -- 91
+num.names$ -- 51
+pop$ -- 185
+preamble$ -- 1
+purify$ -- 90
+quote$ -- 0
+skip$ -- 164
+stack$ -- 0
+substring$ -- 459
+swap$ -- 30
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 84
+warning$ -- 3
+while$ -- 76
+width$ -- 29
+write$ -- 230
+(There were 4 error messages)

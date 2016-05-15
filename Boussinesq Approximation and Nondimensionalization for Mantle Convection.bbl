@@ -1,0 +1,129 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{cig_mantle_convection}
+\emph{{Computational Infrastructure for Geodynamics (CIG)}},
+  \url{https://geodynamics.org/cig/software/\#mc}.
+
+\bibitem{aspect}
+Wolfgang Bangerth, Martin Kronbichler, and Timo Heister, \emph{{High accuracy
+  mantle convection simulation through modern numerical methods }}, Geophysical
+  Journal International \textbf{191} (2012), 12--29.
+
+\bibitem{bernard}
+H.~B{\'e}nard, \emph{{Les tourbillons cellulaires dans une nappe liquide }},
+  Rev. G{\'e}n. Sciences Pure Appl. \textbf{11} (1900), 1261--1271, 1309--1328.
+
+\bibitem{bluman_kumei}
+G.W. Bluman and S.~Kumei, \emph{{Symmetries and Differential Equations}},
+  Springer-Verlag, 1989.
+
+\bibitem{boussinesq_article}
+J.~Boussinesq, \emph{{Theorie Analytique de la Chaleur}}, vol.~2,
+  Gauthier-Villars, 1903.
+
+\bibitem{chandrasekhar}
+S.~Chandrasekhar, \emph{{Hydrodynamic and Hydromagnetic Stability}}, Oxford
+  University Press, 1961.
+
+\bibitem{gebhart}
+B.~Gebhart, \emph{{Heat Transfer}}, 2 ed., McGraw-Hil, 1971.
+
+\bibitem{gerya}
+Taras Gerya, \emph{{Introduction to Numerical Geodynamic Modelling}}, Cambridge
+  University Press, 2009.
+
+\bibitem{getling_scholarpedia}
+A.~V. Getling, \emph{{Rayleigh-Benard Convection}}, Scholarpedia \textbf{7}
+  (2012), no.~7, 7702.
+
+\bibitem{getling}
+A.V. Getling, \emph{{Rayleigh-Benard Convection: Structures and Dynamics}},
+  World Scientific, 1998.
+
+\bibitem{barenblatt1}
+Barenblatt G.I., \emph{{Scaling}}, Cambridge University Press, Cambridge, UK,
+  2003.
+
+\bibitem{boussinesq_validity}
+Donald~D. Gray and Aldo Giorgini, \emph{{The Validity of the Boussinesq
+  Approximation for Liquids and Gases}}, Int. J. Heat Mass Transfer
+  \textbf{19}, 545--551.
+
+\bibitem{olsen}
+H.~Hanche-Olsen, \emph{{Buckingham's Pi-theorem}},
+  \url{http://www.math.ntnu.no/~hanche/notes/buckingham/buckingham-a4.pdf}.
+
+\bibitem{leal}
+L.~Gary Leal, \emph{{Advanced Transport Phenomena}}, Cambridge University
+  Press, 2007.
+
+\bibitem{malkus1}
+W.~V.~R. Malkus, \emph{{Boussinesq equations, Notes on the 1964 Summer Study
+  Program in Geophysical Fluid Dynamics at the Woods Nole Oceanographic
+  Institution}}, U.S. National Technical Information Service \textbf{1} (1964),
+  1--12.
+
+\bibitem{malkus2}
+\bysame, \emph{{A scaling and expansion of equations of motion to yield the
+  Boussinesq equations, Notes on the 1969 Summer Study Program in Geophysical
+  Fluid Dynamics at the Woods Hole Oceanographic Institution}}, U.S. National
+  Technical Information Service \textbf{1} (1969), 23--28.
+
+\bibitem{miesen}
+R.~H.~M. Miesen, L.~P.~J. Kamp, and F.~W. Sluijter, \emph{{On the application
+  of the Boussinesq approximation for nonlinear gravity waves in the atmosphere
+  }}, Physica Scripta \textbf{38} (2006), no.~6, 857.
+
+\bibitem{mihaljan}
+J.~M. Mihaljan, \emph{{A rigorous exposition of the Boussinesq approximatjons
+  applicable to a thin layer of fluid}}, Astrophys. Journal \textbf{136}
+  (1962), 1126--1133.
+
+\bibitem{oberbeck}
+A.~Oberbeck, \emph{{Uber die Warmeleitung der Flussigkeiten bei
+  Berucksichtigung der Stromungen infloge von Temperatur Differenzen}}, Ann.
+  Phys. Chem. \textbf{7} (1879), 271--292.
+
+\bibitem{pellew_and_southwell}
+A.~Pellew and R.~V. Southwell, \emph{{On maintained convective motion in a
+  fluid heated from below}}, Proc. Roy. Soc. A. \textbf{176} (1940), no.~966,
+  312--343.
+
+\bibitem{plate}
+E.~J. Plate, \emph{{Aerodynamic Characteristics of Atmospheric Boundary
+  Layers}}, U.S. National Technical Information Service, 1971.
+
+\bibitem{rayleigh}
+Lord Rayleigh, \emph{{On convection currents in a horizontal layer of fluid,
+  when the higher temperature is on the under side}}, Phil. Mag., Ser.
+  \textbf{6} (1916), no.~32, 529--546.
+
+\bibitem{mantle_conv_in_earth_and_planets}
+Gerald Schubert, Donald~L. Turcotte, and Peter Olson, \emph{{Mantle Convection
+  in the Earth and Planets }}, Cambridge University Press.
+
+\bibitem{sonin}
+A.A. Sonin, \emph{{The Physical Basis of Dimensional Analysis}}, MIT Department
+  of Mechanical Engineering, 2001.
+
+\bibitem{spiegel_and_veronis}
+E.~A. Spiegel and G.~Veronis, \emph{{On the Boussinesq approximation for a
+  compressible fluid}}, Astrophys. Journal \textbf{131} (1960), 442--447.
+
+\bibitem{boussinesq_and_his_approximation}
+Radyadour~Kh. Zeytounian, \emph{{Joseph Boussinesq and his approximation: a
+  contemporary view}}, Comptes Rendus M{\'e}canique \textbf{331} (2003), no.~8,
+  575--586.
+
+\bibitem{zorich}
+V.A. Zorich, \emph{{Mathematical Analysis of Problems in the Natural
+  Sciences}}, MCCME, Moscow, Russian Federation, 2008.
+
+\end{thebibliography}
