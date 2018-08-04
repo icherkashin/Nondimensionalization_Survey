@@ -1,0 +1,17 @@
+\contentsline {chapter}{\tocchapter {Chapter}{}{Introduction}}{1}{chapter*.1}
+\contentsline {chapter}{\tocchapter {Chapter}{1}{Boussinesq Approximation and Nondimensionalization for Mantle Convection}}{3}{chapter.1}
+\contentsline {section}{\tocsection {}{1.1}{Equations of Boussinesq Approximation in Dimensional Form}}{4}{section.1.1}
+\contentsline {subsection}{\tocsubsection {}{1.1.1}{Physical Meaning of the Equations}}{5}{subsection.1.1.1}
+\contentsline {section}{\tocsection {}{1.2}{Applications of the Boussinesq Approximation}}{5}{section.1.2}
+\contentsline {section}{\tocsection {}{1.3}{History of the Boussinesq Approximation}}{6}{section.1.3}
+\contentsline {section}{\tocsection {}{1.4}{Boussinesq Approximation in Computational Models of Mantle Convection}}{7}{section.1.4}
+\contentsline {section}{\tocsection {}{1.5}{Critique of the Boussinesq Approximation}}{7}{section.1.5}
+\contentsline {section}{\tocsection {}{1.6}{Nondimensionalization and Choice of Scales}}{8}{section.1.6}
+\contentsline {subsection}{\tocsubsection {}{1.6.1}{Characteristic Length Scale}}{9}{subsection.1.6.1}
+\contentsline {subsection}{\tocsubsection {}{1.6.2}{Characteristic Temperature Scale}}{9}{subsection.1.6.2}
+\contentsline {subsection}{\tocsubsection {}{1.6.3}{Characteristic Time Scale}}{9}{subsection.1.6.3}
+\contentsline {subsection}{\tocsubsection {}{1.6.4}{Characteristic Velocity Scale}}{10}{subsection.1.6.4}
+\contentsline {subsection}{\tocsubsection {}{1.6.5}{Characteristic Pressure Scale}}{11}{subsection.1.6.5}
+\contentsline {section}{\tocsection {}{1.7}{Nondimensional Form of the Equations of Boussinesq Approximation}}{11}{section.1.7}
+\contentsline {subsection}{\tocsubsection {}{1.7.1}{Physical Meaning of the Rayleigh Number}}{12}{subsection.1.7.1}
+\contentsline {chapter}{\tocchapter {\chaptername }{}{Bibliography}}{13}{chapter*.2}

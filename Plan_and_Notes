@@ -1,0 +1,68 @@
+0. Summary
+
+Comprehensive intro to the equations:
+
+importance
+history
+use in computational models:
+    CIG: ConMan, ASPECT, Taras Gerya
+
+1. Introduction
+
+Introduce the entire set of Mantle Convection equations that we are
+studying:
+
+Incompressible Stokes equations
+div u = 0
+advection diffusion equation for the temperature
+Boussinesq approximation to the density
+
+Explain that we are considering the most basic set of equations, since our
+goal is to demonstrate how to non-dimensionalize these equations in a
+simple setting.
+
+2. Importance
+
+Mention that these equations are used to model convection in the
+Earth's mantle.
+
+Reference Turcotte and Schubert's big book and other references you are aware of.
+Do your best to describe in some detail.
+
+3. History
+
+Track down the origin of the use of these equations (the first
+published incidence).
+
+ADD SOURCE:
+Barenblatt: Scaling, pp. 59-63
+SUMMARY:
+Neglecting the contribution of viscous dissipation to the thermal balance is acceptable for thin layers of fluid, but not thick layers like in the mantle.
+
+4. Use in computational models
+
+Mention that these equations are used in a variety of computer models
+of Mantle Convection:
+
+ASPECT
+Tara Gerya's Finite difference code (reference his book: Introduction to Numerical Geodynamic Modelling 2009)
+etc.
+
+often with additional terms representing, for example, heating from
+inside the mantle. List some other physics that can be added to the
+equations we consider. For example, see the 2012 ASPECT paper.
+
+
+PROBABLY INCORRECT:
+Finally, I think equations (1.1) & (1.2) are in Euclidean or Cartesian
+coordinates.  Since they are not in spherical coordinates, it is probably
+not true that e_z is normal to the Earth's surface. It's OK for us to do
+the analysis in rectangular coordinates, just explain that we are
+considering a simple version of equations that can have a much wider
+applicability given appropriate changes to the equations.  You can list a
+few of these changes!; e.g., spherical coordinates (reference Turcotte and
+Schubert), etc.
+
+NOTES:
+
+1. Look at the middle of Tucotte, Schubert & Olson "Mantle Convection in the Earth and Planets", where Schubert lists a number of different systems of PDEs that can be used in modeling  Mantle Convection in the Earth and Planets.

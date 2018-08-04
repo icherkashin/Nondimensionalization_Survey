@@ -1,0 +1,179 @@
+%% filename: amsbook-template.tex
+%% version: 1.1
+%% date: 2014/07/24
+%%
+%% American Mathematical Society
+%% Technical Support
+%% Publications Technical Group
+%% 201 Charles Street
+%% Providence, RI 02904
+%% USA
+%% tel: (401) 455-4080
+%%      (800) 321-4267 (USA and Canada only)
+%% fax: (401) 331-3842
+%% email: tech-support@ams.org
+%% 
+%% Copyright 2006, 2008-2010, 2014 American Mathematical Society.
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the American Mathematical
+%% Society.
+%%
+%% ====================================================================
+
+%    AMS-LaTeX v.2 driver file template for use with amsbook
+%
+%    Remove any commented or uncommented macros you do not use.
+
+\documentclass[oneside]{amsbook}
+
+%    For use when working on individual chapters
+%\includeonly{}
+
+%    Include referenced packages here.
+
+\usepackage{amsmath, amssymb}
+\usepackage{indentfirst}
+\usepackage{url, cite, hyperref}
+\hypersetup{hidelinks}
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+%    For a single index; for multiple indexes, see the manual
+%    "Instructions for preparation of papers and monographs:
+%    AMS-LaTeX" (instr-l.pdf in the AMS-LaTeX distribution).
+% \makeindex
+
+\begin{document}
+
+\frontmatter
+
+\title{Boussinesq Approximation and Nondimensionalization for Mantle Convection}
+
+%    Remove any unused author tags.
+
+%    author one information
+\author{Ivan Cherkashin}
+\address{University of California, Davis}
+\curraddr{}
+\email{icherkashin@ucdavis.edu}
+% \email{egpuckett@ucdavis.edu}
+
+%    author two information
+% \author{Elbridge G. Puckett}
+\address{}
+\curraddr{}
+% \email{egpuckett@ucdavis.edu}
+\thanks{}
+
+% \subjclass[2015]{Primary }
+
+\keywords{incompressible Stokes equations, mantle, convection, nondimensionalization, scaling, Boussinesq approximation}
+
+\date{\today}
+
+\begin{abstract}
+
+The simplest from of equations of the Boussinesq approximation is nondimensionalized in the context of numerical modeling of mantle convection. Physical considerations underlying the appropriate choices of time, velocity, and pressure scales for nondimensionalization of these equation are explained, which is not widely presented in the literature. The physical meaning of all nondimensional numbers arising as a result of nondimensionalization is discussed. 
+
+The main goal of this survey is to demonstrate the underlying physical reasoning behind nondimensionalization and to obtain a nondimensional form of the equations, commonly used in numerical modeling, that depends only on a single parameter: the Rayleigh number.
+
+\end{abstract}
+
+\maketitle
+
+%    Dedication.  If the dedication is longer than a line or two,
+%    remove the centering instructions and the line break.
+%\cleardoublepage
+%\thispagestyle{empty}
+%\vspace*{13.5pc}
+%\begin{center}
+%  Dedication text (use \\[2pt] for line break if necessary)
+%\end{center}
+%\cleardoublepage
+
+%    Change page number to 6 if a dedication is present.
+\setcounter{page}{4}
+\setcounter{tocdepth}{2}
+
+\tableofcontents
+
+%    Include unnumbered chapters (preface, acknowledgments, etc.) here.
+% \include{Nondimensionalization_of_Navier_Stokes_Equations}
+
+\mainmatter
+%    Include main chapters here.
+
+\chapter*{Introduction}
+
+Nondimensionalization is a powerful method of investigating complex systems when the exact dynamics is practically impossible to compute yet it is still possible to estimate the mutual importance of various factors on the overall dynamics. For example, although, in general, the exact solution to the Navier-Stokes equations cannot be computed, nondimensionalization of these equations may reveal the relative importance of pressure, viscosity, and other factors on the overall behavior of the flow. Thus, knowing that the dissipation of energy and momentum due to viscosity is negligible compared to the vigor of the inertial motion of the fluid, which manifests itself in a very large value of a nondimensional parameter called Reynolds number, it is possible to neglect the viscous terms in the Navier-Stokes equations, thus turning them into Euler's equations. Analagously, when Reynolds number is small and inertial motion is negligible compared to viscous effects, Navier-Stokes equations turn into Stokes equations. These examples demonstrate how nondimensionalization may serve as a tool leading to useful approximations and deeper understanding of the physics underlying mathematical equations.
+
+At a first glance, nondimensionalization appears to be a simple scheme: first, a change of variables that would make the physical variables involved in the equations nondimensional, followed by simple algebraic manipulations with the coefficients of the equations and, finally, taking limits with respect to certain coefficients of interest, such as Reynolds number mentioned above. However, such unintelligent approach may lead to mistakes. For example, under incorrect choice of scales, it may lead to disappearance of the pressure term in the Stokes equations when they are derived from Navier-Stokes, which totally contradicts the physical fact that pressure is an important factor even for highly viscous flows. Thus, correct nondimensionalization requires understanding of the physics underlying the decision one makes when a certain scale must be chosen in order to nondimensionalize a particular physical quantity. Otherwise, nondimensionalization becomes a dull set of tricks, which cannot amount to genuine knowledge and understanding of the natural world. 
+
+Unfortunately, although nondimensionalization has been successfully employed for a long time as a powerful method of investigation, no universal algorithm was developed for applying this method to all of the possible physical situations. It is natural, since it is impossible to account for all of the possible combinations of physical factors in an abstract mathematical scheme. Thus, when one wishes to nondimensionalize the equations of mantle convection, the first difficulty that arises is an absence of a reliable source devoted to this specific context. Because of that, a researcher is compelled to search through a vast, inhomogenous array of literature in order to answer questions regarding the nondimensionalization of the equations of mantle convection. This is obvously inefficient and the valuable knowledge is lost if a successful researcher never shares his synthesis with the community.
+
+The present work is attempts to  address this very problem. It is a synthesis of the numerous, oftentimes very little but important ideas from the sources the author encountered. It is hoped to be a point of growth in the mantle convection community, providing a source that explains nondimensionalization in the context of mantle convection. The author hopes that this work save precious time for other researches and students, which should be devoted to solving new interesting problems. 
+
+The goal of this work is to derive a nondimensional form of the equations of the Boussinesq approximation in the context of mantle convection in a form that depends on a single nondimensional parameter: the Rayleigh number. To do so, we start nondimensionalize the incompressible Stokes equations and the advection-diffusion equation for temperature, explaining the physical meaning of this procedure and its underlying subtleties. Only the simplest form of the equations is considered in which the viscosity and thermal diffusivity are constant. This simplest case is, nevertheless, important, since it is often used for validating competing computational software that solve the same problem employing various numerical methodologies and algorithms.
+
+In addition to presenting nondimensionalization of the equations commonly used in the mantle convection community, the author hopes that his work is also useful from a pedagogical perspective. Hopefully, it answers the questions that members of the community, especially students, often have, and, even more importantly, that it explains how the answers are actually found.
+
+\thanks{The author would like to thank Professor Donald L. Turcotte, and Professor Louise Kellogg from Earth and Planetary Sciences, and Professor Elbridge G. Puckett from the Department of Mathematics and the Computational Infrastructure for Geodynamics at UC Davis for their comments, suggestions, and support for this work.}
+
+% \chapter{Incompressible Navier-Stokes Equations} \label{navier_stokes}
+% \include{chapters/Nondimensionalization_of_Navier_Stokes_Equations}
+
+% \chapter{Stokes Equations} \label{stokes}
+% \include{chapters/From_Navier_Stokes_to_Stokes}
+% 
+% \chapter{Temperature Advection-Diffusion Equation} \label{heat}
+% \include{chapters/Nondimensionalization_of_Temperature_Advection_Diffusion_Equation}
+% 
+% \chapter{The Boussinesq Approximation} \label{boussinesq}
+% \include{chapters/Nondimensionalization_for_Boussinesq_approximation}
+
+\chapter{Boussinesq Approximation and Nondimensionalization for Mantle Convection}
+\include{chapters/Nondimensionalization_for_Mantle_Convection}
+
+% \appendix
+%    Include appendix "chapters" here.
+% \chapter{Buckingham's $\Pi$-Theorem} \label{appendix_pi}
+% \include{chapters/appendix/pi_theorem}
+% \chapter{Poisson Equation for Pressure} \label{appendix_poisson}
+% \include{chapters/appendix/poisson_pressure}
+
+\backmatter
+
+%    Bibliography styles amsplain or harvard are also acceptable.
+\bibliographystyle{amsplain}
+\bibliography{bibliography}
+%    See note above about multiple indexes.
+% \printindex
+
+\end{document}
+
+%-----------------------------------------------------------------------
+% End of amsbook-template.tex
+%-----------------------------------------------------------------------

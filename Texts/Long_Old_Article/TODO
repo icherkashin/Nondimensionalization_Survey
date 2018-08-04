@@ -1,0 +1,6 @@
+1. *.tex:
+- \providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
++ \providecommand{\velocityPressureTensorNondim}{\partial_l^{\prime}v^{k \prime}\partial_k^{\prime}v^{l \prime}}
+- \providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
++ \providecommand{\velocityPressureTensor}{\partial_lv^k\partial_kv^l}
+2. Unify commands into one .tex file?

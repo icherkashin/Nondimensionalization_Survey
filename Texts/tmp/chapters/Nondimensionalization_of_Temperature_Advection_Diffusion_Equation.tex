@@ -1,0 +1,131 @@
+
+\providecommand{\norm}[1]{\lVert#1 \rVert}
+\providecommand{\R}{\begin{pmatrix} R \\ 0 \end{pmatrix}}
+\providecommand{\Q}{\begin{pmatrix} Q_1^{T} \\ Q_2^{T} \end{pmatrix}}
+\providecommand{\SVD}{\begin{pmatrix} \Sigma \\ 0 \end{pmatrix}}
+\providecommand{\SVDr}{\begin{pmatrix} \Sigma_1 & 0 \\ 0 & 0 \end{pmatrix}}
+\providecommand{\V}{\begin{pmatrix} V_1^{T} \\ V_2^{T} \end{pmatrix}}
+\providecommand{\U}{\begin{pmatrix} U_1  U_2 \end{pmatrix}}
+\providecommand{\Vr}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_r^{T} \end{pmatrix}}
+\providecommand{\Vn}{\begin{pmatrix} v_1^{T} \\ \vdots \\ v_n^{T} \end{pmatrix}}
+\providecommand{\Vni}{\begin{pmatrix} v_{1i} \dots v_{ni}\end{pmatrix}}
+\providecommand{\B}{\begin{pmatrix} b_1^{T} \\ \vdots \\ b_n^{T} \end{pmatrix}}
+
+% Dimensional
+
+\providecommand{\divergence}{\nabla\cdot}
+
+\providecommand{\velocity}{\mathbf{v}}
+\providecommand{\substDerivVel}{\frac{D\velocity}{dt}}
+\providecommand{\partialTimeVel}{\partial_t\velocity}
+\providecommand{\inertTermVel}{(\velocity\cdot\nabla)\velocity}
+
+\providecommand{\velocityPressureTensor}{\partial_kv^l\partial_kv^l}
+
+\providecommand{\surfaceNormal}{\mathbf{e}_z}
+\providecommand{\pressGrad}{\nabla p}
+\providecommand{\pressLaplacian}{\Delta p}
+\providecommand{\laplacianVel}{\Delta\velocity}
+
+
+\providecommand{\partialTimeTemp}{\partial_t\theta}
+\providecommand{\inertTermTemp}{(\velocity \cdot \nabla)\theta}
+\providecommand{\tempGrad}{\nabla \theta}
+\providecommand{\laplacianTemp}{\Delta\theta}
+
+% Nondimensional
+
+\providecommand{\divergenceNondim}{\nabla^{\prime}\cdot}
+
+\providecommand{\velocityNondim}{\mathbf{v^{\prime}}}
+
+\providecommand{\substDerivVelNondim}{\frac{D\velocity^{\prime}}{dt^{\prime}}}
+\providecommand{\partialTimeVelNondim}{\partial_{t^{\prime}}\velocity^{\prime}}
+\providecommand{\inertTermVelNondim}{(\velocity^{\prime} \cdot \nabla^{\prime})\velocity^{\prime}}
+
+\providecommand{\velocityPressureTensorNondim}{\partial_k^{\prime}v^{l \prime}\partial_k^{\prime}v^{l \prime}}
+
+\providecommand{\pressGradNondim}{\nabla^{\prime} p^{\prime}}
+\providecommand{\pressLaplacianNondim}{\Delta^{\prime} p^{\prime}}
+\providecommand{\laplacianVelNondim}{\Delta^{\prime}\velocity^{\prime}}
+
+
+\section{Introduction}
+
+The temperature advection-diffusion is nondimensionalized from both the advection and conduction perspectives, and the physical meaning of the corresponding nondimensional parameters is discussed. 
+
+\section{Nondimensionalization of the Temperature Advection-Diffusion Equation}
+
+The nondimensionalization of the temperature advection-diffusion (\ref{heat_eq}) is accomplished in the same manner as in the case of Navier-Stokes equations in chapter \ref{navier_stokes}. 
+
+However, now it is necessary to introduce a new parameter, the characteristic temperature of the system $\Theta$. Operationally, it can be defined, for example, as the average temperature of the field or the difference between the maximum and the minimum temperatures.
+
+According to Buckingham $\Pi$-theorem \cite{barenblatt1} (cf. also \nameref{appendix_pi}), the system can be described by $7 - 4 = 3$ nondimensional parameters, since there are $7$ dimensional parameters describing the heat transfer ($\mathbf{x}, \velocity, \rho, \nu, g, \theta, t$) among which there are $4$ independent units of measurements (mass, length, time, temperature).
+
+By performing a change of variables 
+
+$$ t^{\prime}  = \frac{t}{T},~ \velocityNondim = \frac{\velocity}{V},~ \mathbf{r^{\prime}} = \frac{\mathbf{x}}{L},~ \theta^{\prime} = \frac{\theta}{\Theta} $$ 
+
+and substituting into the equation (\ref{heat_eq}), dropping the primes for notational convenience, we obtain
+
+\begin{equation} \label{heat_eq_preNondim}
+ \frac{\Theta}{T} \partialTimeTemp + \frac{\Theta V}{L} \inertTermTemp = \frac{\kappa \Theta}{L^2} \laplacianTemp 
+\end{equation}
+
+As in the case of Navier-Stokes equations in chapter \ref{navier_stokes}, it is necessary to choose a perspective in order to proceed with nondimensionalization.
+
+\subsection{Advective Term Perspective}
+
+From the point of view of the advective (inertial) term, the equation (\ref{heat_eq_preNondim}) becomes
+
+\begin{equation} \label{heat_eq_inertNondim}
+ St~ \partialTimeTemp + \inertTermTemp = \frac{1}{Pe} \laplacianTemp  
+\end{equation}
+ 
+Since Strouhal number $St$ has the same meaning as in nondimensionalization of Navier-Stokes equations discussed in chapter \ref{navier_stokes}, only the Peclet number $Pe$ deserves a discussion here.
+
+\subsubsection{Peclet Number}
+
+The Peclet number 
+
+$$ Pe = \frac{LV}{\kappa} = \frac{\frac{L^2}{\kappa}}{\frac{L}{V}} = \frac{T_{conduction}}{T_{inertia}} $$
+
+is a measure of the vigour of advection. It can be interpreted as a ratio of conduction and advection time scales, inertial time scale being equivalent to advection time scale. In other words, it indicates which mechanism of heat transfer, convective or conductive, is dominant in the flow.
+
+It is possible to consider the Peclet number as a product of Reynolds and Prandtl number:
+
+$$ Pe = \frac{LV}{\kappa} = \frac{LV}{\nu} \frac{\nu}{\kappa} = RePr, ~ Pr = \frac{\nu}{\kappa} $$
+
+Since the Prandtl number characterizes the medium but not the flow itself, Peclet number can be viewed, to some degree, as a Reynolds number in the context of heat transfer.
+
+\subsubsection{Prandtl Number}
+
+Prandtl number
+
+$$ Pr = \frac{\nu}{\kappa} = \frac{\frac{L^2}{\kappa}}{\frac{L^2}{\nu}} = \frac{T_{conduction}}{T_{viscosity}} $$
+
+can be interpreted as a ratio of conduction and viscosity time scales. Since it does not involve any kinematic or dynamic quantities like characteristic length or speed, Prandtl number characterizes the properties of the medium but it does not characterize the properties of the flow. 
+
+In other words, Prandtl number is constant for different types of flow in the same medium. It simply characterizes which mechanism of energy dissipation, viscous or heat conduction, is dominant for a given material.
+
+\subsection{Conduction Term Perspective}
+
+From the point of view of the conduction (diffusion) term, the equation (\ref{heat_eq_preNondim}) becomes
+
+\begin{equation} \label{heat_eq_diffusNondim}
+\frac{1}{Fo} \partialTimeTemp + Pe ~\inertTermTemp = \laplacianTemp  
+\end{equation}
+
+The only new dimensionless parameter is the Fourier number $Fo$.
+
+\subsubsection{Fourier Number}
+
+The Fourier number
+
+$$ Fo = St Pe = \frac{\kappa T}{L^2} = \frac{T}{\frac{L^2}{\kappa}} = \frac{T}{T_{conduction}}$$
+
+is a ratio of the characteristic time scale of the system and the conduction time scale. It is a measure of how stationary the heat transfer process is. The smaller the time scale of a certain process, the more dominant that process is in the information exchange in the system. 
+
+For example, if the conduction time scale is much smaller than the characteristic time scale of the system (e.g. period of oscillation of a magnetic field), Fourier number will be large and the heat transfer can be considered stationary. In an opposite case, if the frequency, and hence the energy, of the alternating magnetic field is very large, than the fluid will respond to this disturbance and the heat transfer process will be nonstationary.
+
+In other words, heat conduction, due to its dissipative nature, stabilizes the system, whereas external disturbances usually destabilize it, thus making the process inherently nonstationary.
