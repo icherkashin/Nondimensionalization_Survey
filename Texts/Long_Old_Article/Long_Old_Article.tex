@@ -12,9 +12,9 @@
 %%      (800) 321-4267 (USA and Canada only)
 %% fax: (401) 331-3842
 %% email: tech-support@ams.org
-%% 
+%%
 %% Copyright 2006, 2008-2010, 2014 American Mathematical Society.
-%% 
+%%
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
@@ -22,9 +22,9 @@
 %%   http://www.latex-project.org/lppl.txt
 %% and version 1.3c or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
-%% 
+%%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% The Current Maintainer of this work is the American Mathematical
 %% Society.
 %%
@@ -46,6 +46,8 @@
 \usepackage{url, cite, hyperref}
 \hypersetup{hidelinks}
 
+% Approximate date when the article was actually written.
+\renewcommand{\today}{July 7, 2015}
 
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -70,7 +72,8 @@
 
 \frontmatter
 
-\title{Nondimensionalization of Incompressible Navier-Stokes Equations for Mantle Convection: \\ \textit{Long Version}} 
+% \title{Nondimensionalization of Incompressible Navier-Stokes Equations for Mantle Convection: \\ \textit{Long Version}}
+\title{Derivation of the Rayleigh-Benard equations for modeling convection in the Earth's mantle \\ \textit{Long Version}}
 
 %    Remove any unused author tags.
 
@@ -78,7 +81,7 @@
 \author{Ivan Cherkashin \\ Elbridge Gerry Puckett \\ \today}
 \curraddr{}
 \email{cherkashin.i.a@gmail.com}
-% \email{egpuckett@ucdavis.edu}
+\email{egpuckett@ucdavis.edu}
 
 %    author two information
 % \author{Elbridge G. Puckett}
@@ -98,7 +101,7 @@ This survey is devoted to the nondimensionalization of the equations of mantle c
 
 The rationale behind writing this work is the difficulty of finding a complete derivation and explanation of nondimensionalization and its physical meaning in the literature in the context of mantle convection. The relevant material is scattered throughout numerous books and articles. Here we have attempted to synthesize as much of the pertinent material as possible into a single reference.
 
-This survey may be useful to students in geophysics who need to understand the origin of the equations they are working with. It may also be used as a reference for instructors who may find this material useful for presenting the derivation of the equations of mantle convection in nondimensional form.   
+This survey may be useful to students in geophysics who need to understand the origin of the equations they are working with. It may also be used as a reference for instructors who may find this material useful for presenting the derivation of the equations of mantle convection in nondimensional form.
 
 \end{abstract}
 
@@ -130,13 +133,13 @@ This survey may be useful to students in geophysics who need to understand the o
 
 Nondimensionalization is a powerful method of investigating a behavior of complex systems when the exact dynamics is practically impossible to compute yet it is still possible to estimate the mutual importance of various factors on the overall dynamics. For example, although, in general, the exact solution to the Navier-Stokes equations cannot be computed, nondimensionalization of these equations reveals the relative importance of pressure, viscosity, and other factors on the aggregate behavior of the flow. Thus, knowing that the dissipation of energy and momentum due to viscosity is negligible compared to the vigor of the inertial motion of the fluid, which manifests itself in a very large nondimensional parameter called Reynolds number, it is possible to neglect the viscous term in the Navier-Stokes equations, thus turning them into Euler's equations. Analagously, when Reynolds number is small and inertial motion is negligible compared to viscous effects, Navier-Stokes equations turn into Stokes equations. These examples demonstrate how nondimensionalization may serve as a tool leading to useful approximations and deeper understanding of the physics underlying the mathematical equations.
 
-At a first glance, nondimensionalization appears to be a simple scheme: first, a change of variables that would make the independent physical variables nondimensional, followed by simple algebraic manipulations with the coefficients of the equations, and, finally, taking limits with respect to certain coefficients of interest, such as Reynolds number mentioned above. However, such unintelligent approach may lead to mistakes. For example, it may lead to disappearance of the pressure term in the Stokes equations when they are derived from Navier-Stokes, which totally contradicts the physical fact that pressure is an important factor even for highly viscous flows. Thus, correct nondimensionalization requires understanding of the physics underlying the decision one makes when a certain scale must be chosen in order to nondimensionalize a particular physical quantity. Otherwise, nondimensionalization becomes a dull set of tricks, which cannot amount to genuine knowledge and understanding of the natural world. 
+At a first glance, nondimensionalization appears to be a simple scheme: first, a change of variables that would make the independent physical variables nondimensional, followed by simple algebraic manipulations with the coefficients of the equations, and, finally, taking limits with respect to certain coefficients of interest, such as Reynolds number mentioned above. However, such unintelligent approach may lead to mistakes. For example, it may lead to disappearance of the pressure term in the Stokes equations when they are derived from Navier-Stokes, which totally contradicts the physical fact that pressure is an important factor even for highly viscous flows. Thus, correct nondimensionalization requires understanding of the physics underlying the decision one makes when a certain scale must be chosen in order to nondimensionalize a particular physical quantity. Otherwise, nondimensionalization becomes a dull set of tricks, which cannot amount to genuine knowledge and understanding of the natural world.
 
 Unfortunately, although nondimensionalization has been successfully employed for a long time as a powerful method of investigation, no universal algorithm was developed for applying this method to all of the possible physical situations. It is natural, since it is impossible to account for all of the possible combinations of physical factors in an abstract mathematical scheme. Thus, when one wishes to nondimensionalize the equations of mantle convection, the first difficulty that arises is an absence of a reliable source devoted to this specific context. Because of that, a researcher is compelled to search through a vast, inhomogenous array of literature in order to answer his or her questions regarding the nondimensionalization of the equations of mantle convection. This is obvously inefficient and the valuable knowledge is lost if a successful researcher never shares his synthesis with the community.
 
-The present work is addressing this exact problem. It is a synthesis of the numerous, oftentimes very little but important, ideas from the sources the author had available to him. It is intended to be a growing point in the mantle convection community, providing a source that thoroughly explains nondimensionalization in the context of mantle convection. The author hopes that this work save precious time for other researches and students, which should be devoted to solving new intersting problems. 
+The present work is addressing this exact problem. It is a synthesis of the numerous, oftentimes very little but important, ideas from the sources the author had available to him. It is intended to be a growing point in the mantle convection community, providing a source that thoroughly explains nondimensionalization in the context of mantle convection. The author hopes that this work save precious time for other researches and students, which should be devoted to solving new intersting problems.
 
-The goal of this work is to derive a nondimensional form of the equations of the Boussinesq approximation in the context of mantle convection. To do so, we start with the incompressible Navier-Stokes equations and nondimensionalize them, explaining the physical meaning of this procedure and its underlying subtleties. From the Navier-Stokes, we derive Stokes equations, fully explaining the procedure. Then, we nondimensionalize the heat equation in the same pedagogical manner. Moreover, we derive the equations of Boussinesq approximation and nondimensionalize them. Finally, based on all the previous preparations, we derive the equations of mantle convection in the limit of infinite Prandtl number, which is a commonly accepted approximation Earth's mantle. An appendix is intended for those interested in understanding why nondimensionalization is possible per se. Namely, it outlines the proof of Buckingham's $\Pi$-Theorem, which is shown to be simply a consequence of a fundamental theorem of linear algebra. 
+The goal of this work is to derive a nondimensional form of the equations of the Boussinesq approximation in the context of mantle convection. To do so, we start with the incompressible Navier-Stokes equations and nondimensionalize them, explaining the physical meaning of this procedure and its underlying subtleties. From the Navier-Stokes, we derive Stokes equations, fully explaining the procedure. Then, we nondimensionalize the heat equation in the same pedagogical manner. Moreover, we derive the equations of Boussinesq approximation and nondimensionalize them. Finally, based on all the previous preparations, we derive the equations of mantle convection in the limit of infinite Prandtl number, which is a commonly accepted approximation Earth's mantle. An appendix is intended for those interested in understanding why nondimensionalization is possible per se. Namely, it outlines the proof of Buckingham's $\Pi$-Theorem, which is shown to be simply a consequence of a fundamental theorem of linear algebra.
 
 All in all, in addition to solving the problem of deriving the equation commonly accepted in the mantle convection community, the author hopes that his work is also useful from a pedagogical perspective. Hopefully, it answers the questions that the members of the community, especially students, often have, and, even more importantly, that it explains how the answers are actually found.
 
